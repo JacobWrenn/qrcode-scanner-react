@@ -1,0 +1,10 @@
+video {
+  border: 1px black solid;
+  width: 100%;
+  margin-top: 1em;
+  height: 500px;
+}
+
+canvas, img {
+  display: none;
+}
