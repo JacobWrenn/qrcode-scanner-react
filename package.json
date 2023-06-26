@@ -1,7 +1,7 @@
 {
   "name": "qrcode-scanner-react",
   "description": "A very simple QR scanner for react.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": false,
   "author": "Jacob Wrenn <jacob@wrenn.me> (https://github.com/JacobWrenn)",
   "repository": {
@@ -11,19 +11,7 @@
   "main": "dist/Scanner.jsx",
   "types": "dist/Scanner.d.ts",
   "dependencies": {
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "@types/jest": "^29.5.2",
-    "@types/node": "^20.3.1",
-    "@types/react": "^18.2.14",
-    "@types/react-dom": "^18.2.6",
-    "jsqrcode-ts": "^0.1.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1",
-    "typescript": "^5.1.3",
-    "web-vitals": "^2.1.4"
+    "jsqrcode-ts": "^0.1.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -56,6 +44,18 @@
   "devDependencies": {
     "copyfiles": "^2.4.1",
     "npm-run-all": "^4.1.5",
-    "rimraf": "^5.0.1"
+    "rimraf": "^5.0.1",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^29.5.2",
+    "@types/node": "^20.3.1",
+    "@types/react": "^18.2.14",
+    "@types/react-dom": "^18.2.6",
+    "react-dom": "^18.2.0",
+    "react-scripts": "5.0.1",
+    "typescript": "^5.1.3",
+    "web-vitals": "^2.1.4",
+    "react": "^18.2.0"
   }
 }
