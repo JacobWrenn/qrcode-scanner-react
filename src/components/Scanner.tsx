@@ -54,7 +54,7 @@ export default function Scanner({
       if (playing) {
         scanQR();
       }
-    }, 500);
+    }, 100);
 
     const teardown = () => {
       clearInterval(interval);
