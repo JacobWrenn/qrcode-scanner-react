@@ -28,6 +28,9 @@ export default function Scanner({
 
   useEffect(() => {
     const videoElement = video.current as HTMLVideoElement;
+    videoElement.setAttribute("autoplay", "");
+    videoElement.setAttribute("muted", "");
+    videoElement.setAttribute("playsinline", "");
 
     function scanQR() {
       const canvasElement = canvas.current as HTMLCanvasElement;
