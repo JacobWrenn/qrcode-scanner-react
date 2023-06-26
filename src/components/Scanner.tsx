@@ -1,10 +1,16 @@
 import { useRef, useEffect, useState } from "react";
 import "./Scanner.css";
+import getReader from "jsqrcode-ts";
 
-export default function Scanner({ scanning }: { scanning: boolean }) {
+export default function Scanner({
+  scanning,
+  scanSuccess,
+}: {
+  scanning: boolean;
+  scanSuccess: (result: string) => void;
+}) {
   const video = useRef<HTMLVideoElement>(null);
   const canvas = useRef<HTMLCanvasElement>(null);
-  const image = useRef<HTMLImageElement>(null);
   const [camera, setCamera] = useState(false);
   const playing = useRef(false);
   const tracks = useRef<MediaStreamTrack[]>([]);
@@ -20,17 +26,14 @@ export default function Scanner({ scanning }: { scanning: boolean }) {
     }
   }
 
-  function checkQR() {
-    const imageElement = image.current as HTMLImageElement;
-  }
-
   useEffect(() => {
     const videoElement = video.current as HTMLVideoElement;
-    const imageElement = image.current as HTMLImageElement;
 
     function scanQR() {
       const canvasElement = canvas.current as HTMLCanvasElement;
-      const context = canvasElement.getContext("2d");
+      const context = canvasElement.getContext("2d", {
+        willReadFrequently: true,
+      });
       context?.drawImage(
         videoElement,
         0,
@@ -38,14 +41,17 @@ export default function Scanner({ scanning }: { scanning: boolean }) {
         canvasElement.width,
         canvasElement.height
       );
-      imageElement.setAttribute("src", canvasElement.toDataURL("image/png"));
+      const reader = getReader();
+      try {
+        scanSuccess(reader.decode(canvasElement));
+      } catch {}
     }
 
     const interval = setInterval(() => {
       if (playing) {
         scanQR();
       }
-    }, 100);
+    }, 500);
 
     const teardown = () => {
       clearInterval(interval);
@@ -80,13 +86,12 @@ export default function Scanner({ scanning }: { scanning: boolean }) {
     }
 
     return teardown;
-  }, [scanning]);
+  }, [scanning, scanSuccess]);
 
   return (
     <div>
       <video ref={video} onCanPlay={play}></video>
       <canvas ref={canvas}></canvas>
-      <img ref={image} onLoad={checkQR} alt="" />
       {!camera && <p>Camera access not granted!</p>}
     </div>
   );

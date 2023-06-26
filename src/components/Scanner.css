@@ -5,6 +5,6 @@ video {
   height: 500px;
 }
 
-canvas, img {
+canvas {
   display: none;
 }
