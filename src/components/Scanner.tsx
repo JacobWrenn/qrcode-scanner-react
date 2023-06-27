@@ -1,6 +1,6 @@
 import { useRef, useEffect, useState } from "react";
 import "./Scanner.css";
-import getReader from "jsqrcode-ts";
+import scanner from "jsqrcode-ts";
 
 export default function Scanner({
   scanning,
@@ -32,7 +32,7 @@ export default function Scanner({
     videoElement.setAttribute("muted", "");
     videoElement.setAttribute("playsinline", "");
 
-    function scanQR() {
+    async function scanQR() {
       const canvasElement = canvas.current as HTMLCanvasElement;
       const context = canvasElement.getContext("2d", {
         willReadFrequently: true,
@@ -44,9 +44,8 @@ export default function Scanner({
         canvasElement.width,
         canvasElement.height
       );
-      const reader = getReader();
       try {
-        scanSuccess(reader.decode(canvasElement));
+        scanSuccess(await scanner.scan(canvasElement));
       } catch {}
     }
 
