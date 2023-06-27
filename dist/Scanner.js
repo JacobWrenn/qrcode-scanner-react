@@ -39,7 +39,7 @@ import { useRef, useEffect, useState } from "react";
 import "./Scanner.css";
 import scanner from "jsqrcode-ts";
 export default function Scanner(_a) {
-    var scanning = _a.scanning, scanSuccess = _a.scanSuccess;
+    var scanning = _a.scanning, scanSuccess = _a.scanSuccess, className = _a.className;
     var video = useRef(null);
     var canvas = useRef(null);
     var _b = useState(false), camera = _b[0], setCamera = _b[1];
@@ -126,5 +126,5 @@ export default function Scanner(_a) {
         }
         return teardown;
     }, [scanning, scanSuccess]);
-    return (_jsxs("div", { children: [_jsx("video", { ref: video, onCanPlay: play }), _jsx("canvas", { ref: canvas }), !camera && _jsx("p", { children: "Camera access not granted!" })] }));
+    return (_jsxs("div", { id: "qrcode-scanner-react-div", children: [_jsx("video", { ref: video, onCanPlay: play, className: className, id: "qrcode-scanner-react-video" }), _jsx("canvas", { ref: canvas, id: "qrcode-scanner-react-canvas" }), !camera && _jsx("p", { id: "qrcode-scanner-react-p", children: "Camera access not granted!" })] }));
 }

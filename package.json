@@ -1,7 +1,7 @@
 {
   "name": "qrcode-scanner-react",
   "description": "A very simple QR scanner for react.",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "private": false,
   "author": "Jacob Wrenn <jacob@wrenn.me> (https://github.com/JacobWrenn)",
   "repository": {

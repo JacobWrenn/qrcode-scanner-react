@@ -1,10 +1,18 @@
-video {
+#qrcode-scanner-react-video {
   border: 1px black solid;
   width: 100%;
-  margin-top: 1em;
-  height: 500px;
 }
 
-canvas {
+#qrcode-scanner-react-canvas {
   display: none;
+}
+
+#qrcode-scanner-react-div {
+  position: relative;
+}
+
+#qrcode-scanner-react-p {
+  position: absolute;
+  bottom: 1em;
+  left: 1em;
 }
