@@ -34,7 +34,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { useRef, useEffect, useState } from "react";
 import "./Scanner.css";
 import scanner from "jsqrcode-ts";
@@ -126,5 +125,9 @@ export default function Scanner(_a) {
         }
         return teardown;
     }, [scanning, scanSuccess]);
-    return (_jsxs("div", { id: "qrcode-scanner-react-div", children: [_jsx("video", { ref: video, onCanPlay: play, className: className ? className : "", id: "qrcode-scanner-react-video" }), _jsx("canvas", { ref: canvas, id: "qrcode-scanner-react-canvas" }), !camera && _jsx("p", { id: "qrcode-scanner-react-p", children: "Camera access not granted!" })] }));
+    return (<div id="qrcode-scanner-react-div">
+      <video ref={video} onCanPlay={play} className={className ? className : ""} id="qrcode-scanner-react-video"></video>
+      <canvas ref={canvas} id="qrcode-scanner-react-canvas"></canvas>
+      {!camera && <p id="qrcode-scanner-react-p">Camera access not granted!</p>}
+    </div>);
 }

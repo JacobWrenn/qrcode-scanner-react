@@ -5,11 +5,11 @@ import scanner from "jsqrcode-ts";
 export default function Scanner({
   scanning,
   scanSuccess,
-  className
+  className,
 }: {
   scanning: boolean;
   scanSuccess: (result: string) => void;
-  className: string;
+  className?: string;
 }) {
   const video = useRef<HTMLVideoElement>(null);
   const canvas = useRef<HTMLCanvasElement>(null);
@@ -94,7 +94,12 @@ export default function Scanner({
 
   return (
     <div id="qrcode-scanner-react-div">
-      <video ref={video} onCanPlay={play} className={className} id="qrcode-scanner-react-video"></video>
+      <video
+        ref={video}
+        onCanPlay={play}
+        className={className ? className : ""}
+        id="qrcode-scanner-react-video"
+      ></video>
       <canvas ref={canvas} id="qrcode-scanner-react-canvas"></canvas>
       {!camera && <p id="qrcode-scanner-react-p">Camera access not granted!</p>}
     </div>
