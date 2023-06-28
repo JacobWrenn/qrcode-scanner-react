@@ -67,6 +67,7 @@ export default function Scanner(_a) {
                     switch (_c.label) {
                         case 0:
                             canvasElement = canvas.current;
+                            if (!canvasElement) return [3 /*break*/, 4];
                             context = canvasElement.getContext("2d", {
                                 willReadFrequently: true,
                             });

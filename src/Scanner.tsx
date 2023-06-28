@@ -36,19 +36,21 @@ export default function Scanner({
 
     async function scanQR() {
       const canvasElement = canvas.current as HTMLCanvasElement;
-      const context = canvasElement.getContext("2d", {
-        willReadFrequently: true,
-      });
-      context?.drawImage(
-        videoElement,
-        0,
-        0,
-        canvasElement.width,
-        canvasElement.height
-      );
-      try {
-        scanSuccess(await scanner.scan(canvasElement));
-      } catch {}
+      if (canvasElement) {
+        const context = canvasElement.getContext("2d", {
+          willReadFrequently: true,
+        });
+        context?.drawImage(
+          videoElement,
+          0,
+          0,
+          canvasElement.width,
+          canvasElement.height
+        );
+        try {
+          scanSuccess(await scanner.scan(canvasElement));
+        } catch {}
+      }
     }
 
     const interval = setInterval(() => {
