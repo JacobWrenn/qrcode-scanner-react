@@ -73,20 +73,24 @@ export default function Scanner({
     if (scanning) {
       setCamera(true);
       tracks.current = [];
-      navigator.mediaDevices
-        .getUserMedia({
-          video: { facingMode: "environment" },
-        })
-        .then((stream) => {
-          stream.getTracks().forEach((track) => {
-            tracks.current.push(track);
+      if (navigator && navigator.mediaDevices) {
+        navigator.mediaDevices
+          .getUserMedia({
+            video: { facingMode: "environment" },
+          })
+          .then((stream) => {
+            stream.getTracks().forEach((track) => {
+              tracks.current.push(track);
+            });
+            videoElement.muted = true;
+            videoElement.srcObject = stream;
+          })
+          .catch(() => {
+            setCamera(false);
           });
-          videoElement.muted = true;
-          videoElement.srcObject = stream;
-        })
-        .catch(() => {
-          setCamera(false);
-        });
+      } else {
+        setCamera(false);
+      }
     } else {
       teardown();
     }
@@ -103,7 +107,9 @@ export default function Scanner({
         id="qrcode-scanner-react-video"
       ></video>
       <canvas ref={canvas} id="qrcode-scanner-react-canvas"></canvas>
-      {!camera && <p id="qrcode-scanner-react-p">Camera access not granted!</p>}
+      {!camera && (
+        <p id="qrcode-scanner-react-p">Failed to get camera access!</p>
+      )}
     </div>
   );
 }

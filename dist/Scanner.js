@@ -107,25 +107,30 @@ export default function Scanner(_a) {
         if (scanning) {
             setCamera(true);
             tracks.current = [];
-            navigator.mediaDevices
-                .getUserMedia({
-                video: { facingMode: "environment" },
-            })
-                .then(function (stream) {
-                stream.getTracks().forEach(function (track) {
-                    tracks.current.push(track);
+            if (navigator && navigator.mediaDevices) {
+                navigator.mediaDevices
+                    .getUserMedia({
+                    video: { facingMode: "environment" },
+                })
+                    .then(function (stream) {
+                    stream.getTracks().forEach(function (track) {
+                        tracks.current.push(track);
+                    });
+                    videoElement.muted = true;
+                    videoElement.srcObject = stream;
+                })
+                    .catch(function () {
+                    setCamera(false);
                 });
-                videoElement.muted = true;
-                videoElement.srcObject = stream;
-            })
-                .catch(function () {
+            }
+            else {
                 setCamera(false);
-            });
+            }
         }
         else {
             teardown();
         }
         return teardown;
     }, [scanning, scanSuccess]);
-    return (_jsxs("div", { id: "qrcode-scanner-react-div", children: [_jsx("video", { ref: video, onCanPlay: play, className: className ? className : "", id: "qrcode-scanner-react-video" }), _jsx("canvas", { ref: canvas, id: "qrcode-scanner-react-canvas" }), !camera && _jsx("p", { id: "qrcode-scanner-react-p", children: "Camera access not granted!" })] }));
+    return (_jsxs("div", { id: "qrcode-scanner-react-div", children: [_jsx("video", { ref: video, onCanPlay: play, className: className ? className : "", id: "qrcode-scanner-react-video" }), _jsx("canvas", { ref: canvas, id: "qrcode-scanner-react-canvas" }), !camera && (_jsx("p", { id: "qrcode-scanner-react-p", children: "Failed to get camera access!" }))] }));
 }
